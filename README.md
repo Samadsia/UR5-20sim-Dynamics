@@ -30,8 +30,11 @@ The robot kinematic chain is parameterized using standard Denavit-Hartenberg con
 | **6** | $\theta_6$ | $0$ | $0.0000$ | $0.082300$ | $0.1879$ |
 
 ### Initial Transformations
+
 Initial positions and orientations in base coordinates are initialized using homogeneous transformation matrices $\mathbf{T}_{0i,\text{init}}$:
+
 $$\mathbf{p}_{OGi,\text{init}} = \mathbf{T}_{0i,\text{init}}[1:3, 1:3] \cdot \mathbf{r}_{Gi} + \mathbf{T}_{0i,\text{init}}[1:3, 4]$$
+
 $$\mathbf{R}_{\text{init}, i} = \mathbf{T}_{0i,\text{init}}[1:3, 1:3]$$
 
 ---
@@ -39,33 +42,40 @@ $$\mathbf{R}_{\text{init}, i} = \mathbf{T}_{0i,\text{init}}[1:3, 1:3]$$
 ## Mathematical & Bond Graph Formulation
 
 ### 1. Link Dynamics (Euler Submodel `EE`)
+
 Each link is modeled as a 3D rigid body with two vector momentum state variables defined at its Center of Mass (CoM, Point $G$):
+
 - **Linear Momentum**: $\dot{\mathbf{p}}_i = \mathbf{F}_{\text{net}, i} - \boldsymbol{\omega}_i \times \mathbf{p}_i \quad \Longrightarrow \quad \mathbf{v}_{\text{CoM}} = \frac{1}{m_i} \mathbf{p}_i$
 - **Angular Momentum**: $\dot{\mathbf{h}}_i = \boldsymbol{\tau}_{\text{net}, i} - \boldsymbol{\omega}_i \times \mathbf{h}_i \quad \Longrightarrow \quad \boldsymbol{\omega}_i = \mathbf{J}_i^{-1} \mathbf{h}_i$
 
 Dynamic orientation is continuously integrated:
+
 $$\dot{\mathbf{R}}_i = \mathbf{R}_i \cdot \text{skew}(\boldsymbol{\omega}_i)$$
 
 Global gravity is transformed into each link's local moving body frame via the transpose of its rotation matrix:
+
 $$\mathbf{F}_{\text{gravity, body}} = \mathbf{R}_i^T \cdot \begin{bmatrix} 0 \\ 0 \\ -9.81 \cdot m_i \end{bmatrix}$$
 
 ### 2. Joint Modeling & Causality (`MTF`)
+
 Each joint submodel performs power-conserving spatial transformations:
-- **Forward Flow (Velocities)**:
-  $$\boldsymbol{\omega}_{i} = \mathbf{R}_{\text{joint}}(\theta_i) \cdot \boldsymbol{\omega}_{i-1}$$
-- **Backward Effort (Forces & Torques)**:
-  $$\boldsymbol{\tau}_{i-1} = \mathbf{R}_{\text{joint}}^T(\theta_i) \cdot \boldsymbol{\tau}_{i}$$
+
+- **Forward Flow (Velocities)**: $\boldsymbol{\omega}_{i} = \mathbf{R}_{\text{joint}}(\theta_i) \cdot \boldsymbol{\omega}_{i-1}$
+- **Backward Effort (Forces & Torques)**: $\boldsymbol{\tau}_{i-1} = \mathbf{R}_{\text{joint}}^T(\theta_i) \cdot \boldsymbol{\tau}_{i}$
 - **Constraint & Drive Multiplexing**: Blends 2D transverse constraint torques with 1D drive torque from the harmonic drive along the active $Z$-axis.
 
 ### 3. Harmonic Drive Non-Linearities (`H_Drive`)
+
 - **Torsional Compliance ($C$)**: Piecewise nonlinear elasticity across three deflection regimes ($\phi_1$, $\phi_2$) with stiffness parameters $k_1$, $k_2$, and $k_3$.
 - **Rotor & Gearbox Inertia ($I$)**: High-speed motor inertia reflected through reduction ratios.
 - **Friction Dissipation ($R$)**: Mixed Coulomb breakaway torque and viscous damping.
 
 ### 4. Control & Gravity Compensation
+
 - **Decentralized PID**: Joint-level error feedback driven by dynamic reference trajectories streamed via an external library (`DataFromFile.dll`).
 - **Feedforward Gravity Compensation**: Analytical gravity torques calculated for vertical joints (Joints 2 and 3) to cancel static gravitational droop and eliminate steady-state position error:
-  $$\tau_{\text{command}} = \tau_{\text{PID}} + G_i(q)$$
+
+$$\tau_{\text{command}} = \tau_{\text{PID}} + G_i(q)$$
 
 ---
 
