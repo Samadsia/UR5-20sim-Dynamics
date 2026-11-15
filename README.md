@@ -45,8 +45,11 @@ $$\mathbf{R}_{\text{init}, i} = \mathbf{T}_{0i,\text{init}}[1:3, 1:3]$$
 
 Each link is modeled as a 3D rigid body with two vector momentum state variables defined at its Center of Mass (CoM, Point $G$):
 
-- **Linear Momentum**: $\dot{\mathbf{p}}_i = \mathbf{F}_{\text{net}, i} - \boldsymbol{\omega}_i \times \mathbf{p}_i \quad \Longrightarrow \quad \mathbf{v}_{\text{CoM}} = \frac{1}{m_i} \mathbf{p}_i$
-- **Angular Momentum**: $\dot{\mathbf{h}}_i = \boldsymbol{\tau}_{\text{net}, i} - \boldsymbol{\omega}_i \times \mathbf{h}_i \quad \Longrightarrow \quad \boldsymbol{\omega}_i = \mathbf{J}_i^{-1} \mathbf{h}_i$
+- **Linear Momentum**:
+$$\dot{\mathbf{p}}_i = \mathbf{F}_{\text{net}, i} - \boldsymbol{\omega}_i \times \mathbf{p}_i \quad \Longrightarrow \quad \mathbf{v}_{\text{CoM}} = \frac{1}{m_i} \mathbf{p}_i$$
+
+- **Angular Momentum**:
+$$\dot{\mathbf{h}}_i = \boldsymbol{\tau}_{\text{net}, i} - \boldsymbol{\omega}_i \times \mathbf{h}_i \quad \Longrightarrow \quad \boldsymbol{\omega}_i = \mathbf{J}_i^{-1} \mathbf{h}_i$$
 
 Dynamic orientation is continuously integrated:
 
@@ -60,8 +63,12 @@ $$\mathbf{F}_{\text{gravity, body}} = \mathbf{R}_i^T \cdot \begin{bmatrix} 0 \\ 
 
 Each joint submodel performs power-conserving spatial transformations:
 
-- **Forward Flow (Velocities)**: $\boldsymbol{\omega}_{i} = \mathbf{R}_{\text{joint}}(\theta_i) \cdot \boldsymbol{\omega}_{i-1}$
-- **Backward Effort (Forces & Torques)**: $\boldsymbol{\tau}_{i-1} = \mathbf{R}_{\text{joint}}^T(\theta_i) \cdot \boldsymbol{\tau}_{i}$
+- **Forward Flow (Velocities)**:
+$$\boldsymbol{\omega}_{i} = \mathbf{R}_{\text{joint}}(\theta_i) \cdot \boldsymbol{\omega}_{i-1}$$
+
+- **Backward Effort (Forces & Torques)**:
+$$\boldsymbol{\tau}_{i-1} = \mathbf{R}_{\text{joint}}^T(\theta_i) \cdot \boldsymbol{\tau}_{i}$$
+
 - **Constraint & Drive Multiplexing**: Blends 2D transverse constraint torques with 1D drive torque from the harmonic drive along the active $Z$-axis.
 
 ### 3. Harmonic Drive Non-Linearities (`H_Drive`)
