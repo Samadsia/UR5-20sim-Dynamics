@@ -93,15 +93,11 @@ $$\tau_{\text{command}} = \tau_{\text{PID}} + G_i(q)$$
 ## Repository Structure
 
 ```text
-├── Documents.zip             # Compressed archive of data sheets & design specifications
-├── UR5 Dynamic.emx           # Complete 20-sim multi-body dynamic model
-├── joint_1_with_tau.csv      # Joint 1 simulation and torque data logs
-├── joint_2_with_tau.csv      # Joint 2 simulation and torque data logs
-├── joint_3_with_tau.csv      # Joint 3 simulation and torque data logs
-├── joint_4_with_tau.csv      # Joint 4 simulation and torque data logs
-├── joint_5_with_tau.csv      # Joint 5 simulation and torque data logs
-├── joint_6_with_tau.csv      # Joint 6 simulation and torque data logs
-└── README.md                 # Project documentation
+├── Documents/              # Documentation, design specs, and data sheets
+├── assets/                 # Model schematics, simulation plots, and result figures
+├── data/                   # Joint simulation and torque data logs (CSV files)
+├── UR5 Dynamic.emx         # Complete 20-sim multi-body dynamic model
+└── README.md               # Project documentation
 
 ```
 
