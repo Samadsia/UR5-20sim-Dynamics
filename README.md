@@ -94,7 +94,6 @@ $$\tau_{\text{command}} = \tau_{\text{PID}} + G_i(q)$$
 
 ```text
 ├── Documents.zip             # Compressed archive of data sheets & design specifications
-├── UR5 inverse kinematics.pdf # Inverse kinematics derivations and notes
 ├── UR5 Dynamic.emx           # Complete 20-sim multi-body dynamic model
 ├── joint_1_with_tau.csv      # Joint 1 simulation and torque data logs
 ├── joint_2_with_tau.csv      # Joint 2 simulation and torque data logs
