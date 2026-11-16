@@ -93,17 +93,16 @@ $$\tau_{\text{command}} = \tau_{\text{PID}} + G_i(q)$$
 ## Repository Structure
 
 ```text
-├── docs/
-│   ├── UR5_Kinematics_and_Dynamics.pdf    # Theoretical derivations and DH diagrams
-│   └── Harmonic_Drive_Modeling.pdf        # Piecewise compliance and friction specs
-├── models/
-│   └── UR5_Model.emx                      # Complete 20-sim project model
-├── src/
-│   ├── DataFromFile.c                     # C source for trajectory file streaming
-│   └── DataFromFile.dll                   # Dynamic library for 20-sim integration
-├── trajectories/
-│   └── joint_references.dat               # Joint-space position trajectory profiles
-└── README.md
+├── Documents.zip             # Compressed archive of data sheets & design specifications
+├── UR5 inverse kinematics.pdf # Inverse kinematics derivations and notes
+├── UR5 Dynamic.emx           # Complete 20-sim multi-body dynamic model
+├── joint_1_with_tau.csv      # Joint 1 simulation and torque data logs
+├── joint_2_with_tau.csv      # Joint 2 simulation and torque data logs
+├── joint_3_with_tau.csv      # Joint 3 simulation and torque data logs
+├── joint_4_with_tau.csv      # Joint 4 simulation and torque data logs
+├── joint_5_with_tau.csv      # Joint 5 simulation and torque data logs
+├── joint_6_with_tau.csv      # Joint 6 simulation and torque data logs
+└── README.md                 # Project documentation
 
 ```
 
