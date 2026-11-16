@@ -90,13 +90,13 @@ $$\tau_{\text{command}} = \tau_{\text{PID}} + G_i(q)$$
 
 ```text
 ├── docs/
-│   ├── UR5_Kinematics_and_Dynamics.pdf    # Theoretical derivations and DH diagrams
-│   └── Harmonic_Drive_Modeling.pdf        # Piecewise compliance and friction specs
+│   ├── UR5_Kinematics_and_Dynamics.pdf    --> Theoretical derivations and DH diagrams
+│   └── Harmonic_Drive_Modeling.pdf        --> Piecewise compliance and friction specs
 ├── models/
-│   └── UR5_Model.emx                      # Complete 20-sim project model
+│   └── UR5_Model.emx                      --> Complete 20-sim project model
 ├── src/
-│   ├── DataFromFile.c                     # C source for trajectory file streaming
-│   └── DataFromFile.dll                   # Dynamic library for 20-sim integration
+│   ├── DataFromFile.c                     --> C source for trajectory file streaming
+│   └── DataFromFile.dll                   --> Dynamic library for 20-sim integration
 ├── trajectories/
-│   └── joint_references.dat               # Joint-space position trajectory profiles
+│   └── joint_references.dat               --> Joint-space position trajectory profiles
 └── README.md
